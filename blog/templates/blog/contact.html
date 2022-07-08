@@ -1,0 +1,102 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+{% block content %}
+
+<nav class="navbar navbar-expand-lg navbar-light shadow-sm">
+  <div class="container">
+    <a class="navbar-brand" href="{% url 'home' %}"
+      ><span class="text-primary">Healthcare</span>-System</a
+    >
+
+    <div class="collapse navbar-collapse" id="navbarSupport">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item ">
+          <a class="nav-link" href="{% url 'home' %}">Home</a>
+        </li>
+        
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'doctors' %}">Doctors</a>
+        </li>              
+        <li class="nav-item active">
+          <a class="nav-link" href="{% url 'contact' %}">Contact</a>
+        </li>
+
+
+        {% if request.user.is_superuser %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'admin:index' %}">Admin</a>
+            </li>
+        {% endif %}
+        
+        
+          {% if user.is_authenticated %}
+            <li class="nav-item ">
+              <a class="nav-link" href="{% url 'profile' %}">Profile</a>
+            </li>
+            <li class="nav-item">
+              <a class="btn btn-primary ml-lg-3" href="{% url 'logout' %}">Logout</a>
+            </li>
+          {% else %}
+            <li class="nav-item">
+              <a class="btn btn-primary ml-lg-3" href="{% url 'prelogin' %}">Login</a>
+            </li>
+          {% endif %}
+            
+         
+      </ul>
+    </div>
+    <!-- .navbar-collapse -->
+  </div>
+  <!-- .container -->
+</nav>
+
+<div class="page-banner overlay-dark bg-image" style="background-image: url({% static 'blog/img/bg_image_1.jpg' %});">
+    <div class="banner-section">
+      <div class="container text-center wow fadeInUp">
+        <nav aria-label="Breadcrumb">
+          <ol class="breadcrumb breadcrumb-dark bg-transparent justify-content-center py-0 mb-2">
+            <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Contact</li>
+          </ol>
+        </nav>
+        <h1 class="font-weight-normal">Contact</h1>
+      </div> <!-- .container -->
+    </div> <!-- .banner-section -->
+  </div> <!-- .page-banner -->
+
+  <div class="page-section">
+    <div class="container">
+      <h1 class="text-center wow fadeInUp">Get in Touch</h1>
+
+      <form action="" method = "POST" class="contact-form mt-5" >
+        {% csrf_token %}
+        <div class="row mb-3">
+          <div class="col-sm-6 py-2 wow fadeInLeft">
+            <label for="fullname">Name</label>
+            <input type="text" name="fullname" class="form-control" placeholder="Full name..">
+          </div>
+          <div class="col-sm-6 py-2 wow fadeInRight">
+            <label for="emailAddress">Email</label>
+            <input type="text" name="email" class="form-control" placeholder="Email address..">
+          </div>
+          <div class="col-12 py-2 wow fadeInUp">
+            <label for="subject">Subject</label>
+            <input type="text" name="subject" class="form-control" placeholder="Enter subject..">
+          </div>
+          <div class="col-12 py-2 wow fadeInUp">
+            <label for="message">Message</label>
+            <textarea name="message" class="form-control" rows="8" placeholder="Enter Message.."></textarea>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary wow zoomIn">Send Message</button>
+      </form>
+    </div>
+  </div>
+
+  <h1 class="text-center wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">Our Location</h1>
+
+  <div class="maps-container wow fadeInUp">
+    <iframe width="100%" height="100%" id="gmap_canvas" src="https://maps.google.com/maps?ll=33.3125904,44.4279696&q=University of Information Technology and Communications / Information Technology Faculty of Business&t=&z=14&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
+  </div>
+
+{% endblock content %}
