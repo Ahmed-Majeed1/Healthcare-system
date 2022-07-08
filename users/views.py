@@ -37,21 +37,6 @@ def face_register(request):
     face_reg(name)
     return redirect('profile')
 
-# def face_compare(request):
-    # if request.method == 'POST':
-    #     form = faceon(request.POST, instance=request.user.profile.face)
-    #     if form.is_valid():
-    #         form.save()
-    #         context = {'form' : form}
-    #         messages.success(request, f'Face ID Turned on')
-    #         return render(request, 'users/profile.html', context)
-    # if face_test() == True:
-    #     messages.success(request, f'Your face was recognized, Logged in Successfully!')
-    #     return redirect('profile')
-    
-    # if face_test() == False:
-    #     messages.success(request, f"Face wasn't recognized, Try Again!")
-    #     return redirect('doctors')
 
 def login(request):
     
